@@ -1,32 +1,16 @@
 import { Router } from 'express';
-// import Plan from '@modules/plans/infra/typeorm/entities/Plan';
-import PlansRepository from '@modules/plans/infra/typeorm/repositories/PlansRepository';
-import { getCustomRepository } from 'typeorm';
-import CreatePlanService from '@modules/plans/services/CreatePlanService';
+import PlansController from '../controllers/PlansController';
 
 const plansRouter = Router();
+const plansController = new PlansController();
 
 
-plansRouter.get('/', async (request, response) => {
-    const plansRepository = getCustomRepository(PlansRepository);
-    const plans = await plansRepository.find();
-    return response.json(plans);
-});
+// plansRouter.get('/', async (request, response) => {
+//     const plans = await plansRepository.find();
+//     return response.json(plans);
+// });
 
 
-plansRouter.post('/', async (request, response) => {
-    try {
-        const { name, free_min } = request.body;
-        const createPlan = new CreatePlanService();
-        const plan = await createPlan.execute({
-            name,
-            free_min,
-        });
-        
-        return response.json(plan);
-    } catch(err) {
-        return response.status(400).json({ error: err.message });
-    }
-});
+plansRouter.post('/', plansController.create);
 
 export default plansRouter;

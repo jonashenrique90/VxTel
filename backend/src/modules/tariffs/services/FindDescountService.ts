@@ -1,6 +1,6 @@
-import { getCustomRepository } from 'typeorm';
-import PlansRepository from '@modules/plans/infra/typeorm/repositories/PlansRepository';
-import TariffsRepository from '@modules/tariffs/infra/typeorm/repositories/TarrifsRepository';
+import { injectable, inject } from 'tsyringe';
+import ITariffsRepository from '../repositories/ITariffsRepository';
+import IPlansRepository from '@modules/plans/repositories/IPlansRepository';
 
 interface RequestDTO {
     origin?: string;
@@ -14,25 +14,28 @@ interface Response {
     withoutFaleMais: number;
 }
 
-class FindDescountService{
+@injectable()
+class FindDescountService {
+    constructor(
+        @inject('TariffsRepository')
+        private tariffsRepository: ITariffsRepository,
+        @inject('PlansRepository')
+        private plansRepository: IPlansRepository,
+    ) {}
     
     public async execute({origin, destiny, min, idPlan }: RequestDTO): Promise<Response> {
         let withFaleMais = 0;
         let withoutFaleMais = 0;
-        const plansRepository = getCustomRepository(PlansRepository);
-        const tariffsRepository = getCustomRepository(TariffsRepository);
         
-        const tariff = await tariffsRepository.findByOriginAndDestiny(origin, destiny);
+        const tariff = await this.tariffsRepository.findByOriginAndDestiny(origin, destiny);
+        
         if(!tariff) {
             throw new Error('should not be able to find a tax from origin and destiny');
         }
-        console.log(min);
-        console.log(tariff);
-        
         
         withoutFaleMais = min * tariff?.tax;
 
-        const plan = await plansRepository.findOne(idPlan);
+        const plan = await this.plansRepository.findById(idPlan);
         if(!plan) {
             throw new Error('should not be able to find a plan');
         }

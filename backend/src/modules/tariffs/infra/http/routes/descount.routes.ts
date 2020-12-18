@@ -1,25 +1,10 @@
 import { Router } from 'express';
-import FindDescountService from '@modules/tariffs/services/FindDescountService';
+import DescountsController from '../controllers/DescountsController';
 
 const descountRouter = Router();
+const descountsController = new DescountsController();
 
-descountRouter.get('/', async (request, response) => {
-    try {
-        const {origin, destiny, minutes, idPlan } = request.query;   
-    
-        const min = parseInt(minutes);
-        const descount = new FindDescountService();
-        const plan = await descount.execute({
-            origin,
-            destiny,
-            min,
-            idPlan,
-        });
-        
-        return response.json(plan);
-    } catch(err) {
-        return response.status(400).json({ error: err.message });
-    }
-});
+
+descountRouter.get('/', descountsController.index);
 
 export default descountRouter;

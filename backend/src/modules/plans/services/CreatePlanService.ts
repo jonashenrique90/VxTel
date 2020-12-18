@@ -1,22 +1,26 @@
+import { inject, injectable} from 'tsyringe';
 import Plan from '../infra/typeorm/entities/Plan';
-import { getCustomRepository } from 'typeorm';
 import PlansRepository from '@modules/plans/infra/typeorm/repositories/PlansRepository';
+import IPlansRepository from '@modules/plans/repositories/IPlansRepository';
 
 interface RequestDTO {
     name: string;
     free_min: number;
 }
-
-class CreatePlanService{
+@injectable()
+class CreatePlanService {
+    constructor(
+        @inject('PlansRepository')
+        private plansRepository: IPlansRepository,
+    ) {}
     
     public async execute({name, free_min }: RequestDTO): Promise<Plan> {
-        const plansRepository = getCustomRepository(PlansRepository);
         
-        const plan = plansRepository.create({
+        const plan = await this.plansRepository.create({
             name,
             free_min,
         });
-        await plansRepository.save(plan);
+        
         return plan;
     }
 }
