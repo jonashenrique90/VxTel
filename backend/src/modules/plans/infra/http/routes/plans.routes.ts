@@ -5,10 +5,7 @@ const plansRouter = Router();
 const plansController = new PlansController();
 
 
-// plansRouter.get('/', async (request, response) => {
-//     const plans = await plansRepository.find();
-//     return response.json(plans);
-// });
+plansRouter.get('/', plansController.index);
 
 
 plansRouter.post('/', plansController.create);

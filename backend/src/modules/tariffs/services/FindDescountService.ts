@@ -27,6 +27,9 @@ class FindDescountService {
         let withFaleMais = 0;
         let withoutFaleMais = 0;
         
+        if(min < 0) {
+            throw new Error('Minutes most be greater then 0');
+        }
         const tariff = await this.tariffsRepository.findByOriginAndDestiny(origin, destiny);
         
         if(!tariff) {

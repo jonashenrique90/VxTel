@@ -17,14 +17,23 @@ class CreateTariffService {
     
     public async execute({origin, destiny, tax }: RequestDTO): Promise<Tariff> {
 
-        
-        const tariff = await this.tariffsRepository.create({
-            origin,
-            destiny,
-            tax
-        });
+        if(tax < 0) {
+            throw new Error("Tax cannot be less than zero.")
+        }
 
-        return tariff;
+        const tariff = await this.tariffsRepository.findByOriginAndDestiny(origin, destiny);
+        if(tariff) {
+            throw new Error("Tariff already exists for these parameters!");
+        } else {
+            const newTariff = await this.tariffsRepository.create({
+                origin,
+                destiny,
+                tax
+            });
+    
+            return newTariff;            
+        }
+        
     }
 }
 
