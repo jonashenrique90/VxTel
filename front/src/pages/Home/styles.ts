@@ -15,11 +15,7 @@ export const Container = styled.div`
     
     form {
         flex: 1;
-    /* margin-top: 380px auto; */
-    /* margin-bottom: 80px; */
         padding: 64px;
-    /* max-width: 730px; */
-        /* background: #FFF; */
         border-radius: 8px;
         display: flex;
         flex-direction: column;
@@ -148,7 +144,6 @@ export const DescountContainer = styled.div`
     height: 100%;
     max-width: 110rem;
     background: #312E38;
-    /* color: #fff; */
     margin: 0 auto;
     overflow: auto;
     padding: 0 4rem;
