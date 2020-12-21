@@ -32,7 +32,7 @@ $ yarn seed:run
 
 6 Executar o Server
 
-$ yarn dev:serve
+$ yarn dev:server
 
 
 ## Front
