@@ -10,6 +10,13 @@ Entre na pasta backend e execute:
  ```bash
  $ yarn
 ```
+
+Copie o arquivo ormconfig.example.json:
+
+ ```bash
+ $ cp ormconfig.example.json ormconfig.json
+```
+
 Crie um database novo no postgres e configure a conexão de acordo com o arquivo ormconfig.json:
 ```bash
 "type": "postgres",
