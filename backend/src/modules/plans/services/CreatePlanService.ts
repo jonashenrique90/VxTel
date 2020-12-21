@@ -2,6 +2,7 @@ import { inject, injectable} from 'tsyringe';
 import Plan from '../infra/typeorm/entities/Plan';
 import PlansRepository from '@modules/plans/infra/typeorm/repositories/PlansRepository';
 import IPlansRepository from '@modules/plans/repositories/IPlansRepository';
+import AppError from '@shared/errors/AppError';
 
 interface RequestDTO {
     name: string;
@@ -17,7 +18,7 @@ class CreatePlanService {
     public async execute({name, free_min }: RequestDTO): Promise<Plan> {
         
         if(free_min < 0) {
-            throw new Error('Minutes cannot be less than zero.')
+            throw new AppError('Minutes cannot be less than zero.')
         }
         const plan = await this.plansRepository.create({
             name,

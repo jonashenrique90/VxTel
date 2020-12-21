@@ -1,14 +1,14 @@
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { Container, Logo } from './styles';
-import logo from '../../assets/logo.svg';
+import { MdPhoneIphone } from 'react-icons/md';
 
 
 const Navbar: React.FC = () => {
     return (
         <Container>
             <Logo>
-                <img src={logo} alt="VxTel"/>
+                <MdPhoneIphone size={25} color="#2FB86E"></MdPhoneIphone>
                 <h1>VxTel</h1>
             </Logo>
             <a href="https://github.com/jonashenrique90/VxTel" target="blank">

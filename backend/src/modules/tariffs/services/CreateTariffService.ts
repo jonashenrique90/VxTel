@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 import ITariffsRepository from '../repositories/ITariffsRepository';
 import Tariff from '@modules/tariffs/infra/typeorm/entities/Tariff';
+import AppError from '@shared/errors/AppError';
 
 interface RequestDTO {
     origin: string;
@@ -18,12 +19,12 @@ class CreateTariffService {
     public async execute({origin, destiny, tax }: RequestDTO): Promise<Tariff> {
 
         if(tax < 0) {
-            throw new Error("Tax cannot be less than zero.")
+            throw new AppError("Tax cannot be less than zero.")
         }
 
         const tariff = await this.tariffsRepository.findByOriginAndDestiny(origin, destiny);
         if(tariff) {
-            throw new Error("Tariff already exists for these parameters!");
+            throw new AppError("Tariff already exists for these parameters!");
         } else {
             const newTariff = await this.tariffsRepository.create({
                 origin,

@@ -3,6 +3,7 @@ import FakePlansRepository from '@modules/plans/repositories/fakes/FakePlansRepo
 import FindDescountService from './FindDescountService';
 import CreatePlanService from '@modules/plans/services/CreatePlanService';
 import CreateTariffService from './CreateTariffService';
+import AppError from '@shared/errors/AppError';
 
 describe('FindDescount', () => {
     it('should be able to return a descount', async () => {
@@ -104,7 +105,7 @@ describe('FindDescount', () => {
             destiny: '071',
             min: 20,
             idPlan: plan.id,          
-        })).rejects.toBeInstanceOf(Error);
+        })).rejects.toBeInstanceOf(AppError);
     });
 
     it("should not be able to return a descount if plan doesn't exists", async () => {
@@ -139,7 +140,7 @@ describe('FindDescount', () => {
             destiny: '016',
             min: 20,
             idPlan: 'test-error',         
-        })).rejects.toBeInstanceOf(Error);
+        })).rejects.toBeInstanceOf(AppError);
     });
     it("should not be able to return a descount minutes it's smaller than 0", async () => {
         const fakeTariffsRepository = new FakeTariffsRepository();
@@ -173,6 +174,6 @@ describe('FindDescount', () => {
             destiny: '016',
             min: -20,
             idPlan: plan.id,         
-        })).rejects.toBeInstanceOf(Error);
+        })).rejects.toBeInstanceOf(AppError);
     });
 });

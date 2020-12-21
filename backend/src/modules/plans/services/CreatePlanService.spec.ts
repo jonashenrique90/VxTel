@@ -1,5 +1,6 @@
 import FakePlansRepository from '../repositories/fakes/FakePlansRepository';
 import CreatePlanService from './CreatePlanService';
+import AppError from '@shared/errors/AppError';
 
 describe('CreatePlan', () => {
     it('should be able to create a new plan', async () => {
@@ -26,6 +27,6 @@ describe('CreatePlan', () => {
         await expect(createPlan.execute({
             name: 'Plano30Mais',
             free_min: -30,
-        })).rejects.toBeInstanceOf(Error);
+        })).rejects.toBeInstanceOf(AppError);
     });
 });

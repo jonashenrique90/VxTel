@@ -1,5 +1,6 @@
 import FakeTariffsRepository from '../repositories/fakes/FakeTariffsRepository';
 import CreateTariffService from './CreateTariffService';
+import AppError from '@shared/errors/AppError';
 
 describe('CreateTariff', () => {
     it('should be able to create a new tariff', async () => {
@@ -35,7 +36,7 @@ describe('CreateTariff', () => {
             origin: '011',
             destiny: '016',
             tax: 1.9,
-        })).rejects.toBeInstanceOf(Error);
+        })).rejects.toBeInstanceOf(AppError);
 
     });
     it('should not be able to create a tariff if tax < 0', async () => {
@@ -53,6 +54,6 @@ describe('CreateTariff', () => {
             origin: '011',
             destiny: '016',
             tax: -2,
-        })).rejects.toBeInstanceOf(Error);
+        })).rejects.toBeInstanceOf(AppError);
     });
 });

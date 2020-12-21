@@ -21,7 +21,7 @@ export const Container = styled.div`
     align-items: center;
     
     img { 
-        width: 200px;
+        width: 350px;
         justify-self: flex-end;
     }
 `;

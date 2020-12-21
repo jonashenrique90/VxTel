@@ -1,4 +1,5 @@
 import React, { useState, useEffect ,ChangeEvent, FormEvent } from 'react';
+import swal from 'sweetalert';
 import api from '../../service/api';
 import Navbar from '../../components/Navbar';
 import Head from '../../components/Head';
@@ -37,7 +38,7 @@ const Home: React.FC = () => {
         })
     }, []);    
 
-    function handleSelectUf(ev: ChangeEvent<HTMLSelectElement>) {
+    function handleSelectPlan(ev: ChangeEvent<HTMLSelectElement>) {
         const plan = ev.target.value;
         setSelectedPlan(plan);
     }
@@ -53,39 +54,24 @@ const Home: React.FC = () => {
 
     async function handleSubmit(ev: FormEvent) {
         ev.preventDefault();
-        const { origin, destiny, minutes} = formData;
-        // const uf = selectedUf;
-        // const origin = name;
-        // const destiny = email;
-        // const minutes = whatsapp;
-        const idPlan = selectedPlan;
-        // const city = selectedCity;
-        // const [latitude, longitude] = selectedPositon;
-        // const items = selectedItems;
-        // const data = {
-        //     origin,
-        //     destiny,
-        //     minutes,
-        //     idPlan,
-            // city,
-            // latitude,
-            // longitude,
-            // items
-        // };
-        console.log(origin);
-        console.log(destiny);
-        console.log(minutes);
-        console.log(idPlan);
-        
-        
-        await api.get('/descount', {
-            params:{
-                origin,
-                destiny,
-                minutes,
-                idPlan,
-            }
-        }).then(res => setResult(res.data));       
+            const { origin, destiny, minutes} = formData;
+            const idPlan = selectedPlan;            
+            
+            await api.get('/descount', {
+                params:{
+                    origin,
+                    destiny,
+                    minutes,
+                    idPlan,
+                }
+            })
+            .then(res => setResult(res.data))
+            .catch(err => {
+                swal("Erro!", err.response.data.message, "error");
+                setResult(undefined);
+            });   
+                
+
     }
     
     console.log("result:",result);
@@ -126,8 +112,8 @@ const Home: React.FC = () => {
                         </div>
                         <div className="field">
                             <label htmlFor="uf">Plano</label>
-                            <select name="uf" id="uf" value={selectedPlan} onChange={handleSelectUf}>
-                                <option value="0">Selecione um Estado</option>
+                            <select name="uf" id="uf" value={selectedPlan} onChange={handleSelectPlan}>
+                                <option value="">Selecione um Plano</option>
                                 {plans.map(plan => (
                                     <option key={plan.id} value={plan.id}>{plan.name}</option>
                                 ))}
@@ -142,12 +128,12 @@ const Home: React.FC = () => {
                 <DescountContainer>
                     <Descount>
                         <strong>Com Plano Fale Mais</strong>
-                        <p>R$: {result.withFaleMais}</p>
+                        <p>{result.withFaleMais.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</p>
                         <button>Assinar</button>
                     </Descount>
                     <Descount>
                         <strong>Sem o Plano Fale Mais</strong>
-                        <p>R$: {result.withoutFaleMais}</p>
+                        <p>{result.withoutFaleMais.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</p>
                     </Descount>
                 </DescountContainer>
                 </>

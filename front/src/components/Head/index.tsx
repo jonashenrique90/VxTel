@@ -1,7 +1,7 @@
 import React from 'react';
 import { HeadSection, Container, Content, SubHeadSection, SubHeadContainer, SubHeadContent } from './styles';
-import ServerImage from '../../assets/home_background.svg';
-import Server2Image from '../../assets/calls.svg';
+import home_background from '../../assets/home_background.svg';
+import calls from '../../assets/calls.svg';
 
 
 const Head: React.FC = () => {
@@ -10,23 +10,23 @@ const Head: React.FC = () => {
         <HeadSection>
             <Container>
                 <Content>
-                    <h1>Features</h1>
+                    <h1>Ofertas</h1>
                     <p>
-                        Check out the features of Loruki that separate us from the competition
+                        Confira todas as nossas ofertas e conheça todos os benefícios de ser nosso cliente. 
                     </p>
                 </Content>
-                <img src={ServerImage} alt="Server"/>
+                <img src={calls} alt="Calls"/>
             </Container>
         </HeadSection>
         <SubHeadSection>
             <SubHeadContainer>
                 <SubHeadContent>
-                <h1>The Loruki Platform</h1>
+                <h1>Nossos Planos</h1>
                     <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor cupiditate dignissimos temporibus perspiciatis quae! Suscipit qui, consectetur ea consequatur, doloribus repellendus quasi, aut corporis nam alias culpa. Nostrum, inventore accusantium!
+                    Nos planos Fale Mais você recebe uma quantidade grátis de minutos. Ou seja, se você contratou o plano Fale mais 120, poderá falar até 120 minutos grátis. Pesquise pelo plano que mais combina com você.
                     </p>
                 </SubHeadContent>
-                <img src={Server2Image} alt="Server"/>
+                <img src={home_background} alt="Background"/>
             </SubHeadContainer>
         </SubHeadSection>
         </>            

@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 import ITariffsRepository from '../repositories/ITariffsRepository';
 import IPlansRepository from '@modules/plans/repositories/IPlansRepository';
+import AppError from '@shared/errors/AppError';
 
 interface RequestDTO {
     origin?: string;
@@ -28,19 +29,19 @@ class FindDescountService {
         let withoutFaleMais = 0;
         
         if(min < 0) {
-            throw new Error('Minutes most be greater then 0');
+            throw new AppError('Minutes most be greater then 0');
         }
         const tariff = await this.tariffsRepository.findByOriginAndDestiny(origin, destiny);
         
         if(!tariff) {
-            throw new Error('should not be able to find a tax from origin and destiny');
+            throw new AppError('Não foi possível encontrar uma tarifa para o DDD de origem e destino informados!');
         }
         
         withoutFaleMais = min * tariff?.tax;
 
         const plan = await this.plansRepository.findById(idPlan);
         if(!plan) {
-            throw new Error('should not be able to find a plan');
+            throw new AppError('should not be able to find a plan');
         }
        
         const free_minutes = (min - plan?.free_min);

@@ -30,6 +30,13 @@ export const Logo = styled.div`
     display: flex;
     justify-content: start;
     align-items: center;
+    img {
+        fill: #2FB86E;
+    }
+    h1 {
+        margin-left: 5px;
+        color: #2FB86E;
+    }
 
     @media (max-width: 500px) {
         height: auto;
@@ -48,7 +55,7 @@ export const Nav = styled.nav`
 
     @media (max-width: 500px) {
         padding: 20px;
-        background: #002240;
+        background: #2FB86E;
         border-radius: 5px;
     }  
 `;
