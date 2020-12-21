@@ -9,7 +9,11 @@ Show me the code
 
  $ yarn
  
-2 - Crie um database novo no postgres e configure a conexão de acordo com o arquivo ormconfig.json:
+2 - Copie o arquivo ormconfig.example.json:
+ 
+ $ cp ormconfig.example.json ormconfig.json
+ 
+3 - Crie um database novo no postgres e configure a conexão de acordo com o arquivo ormconfig.json:
 
 "type": "postgres",
 "host": "localhost",
@@ -18,15 +22,15 @@ Show me the code
 "password": "docker",
 "database": "vxtel",
 
-3 - Executar as Migrations:
+4 - Executar as Migrations:
 
 $ yarn typeorm migration:run
 
-4 - Executar os Seeds:
+5 - Executar os Seeds:
 
 $ yarn seed:run
 
-5 Executar o Server
+6 Executar o Server
 
 $ yarn dev:serve
 
