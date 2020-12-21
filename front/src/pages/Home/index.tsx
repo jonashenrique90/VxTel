@@ -111,9 +111,9 @@ const Home: React.FC = () => {
                         />
                         </div>
                         <div className="field">
-                            <label htmlFor="uf">Plano</label>
-                            <select name="uf" id="uf" value={selectedPlan} onChange={handleSelectPlan}>
-                                <option value="">Selecione um Plano</option>
+                            <label htmlFor="idPlan">Plano</label>
+                            <select name="idPlan" id="idPlan" value={selectedPlan} onChange={handleSelectPlan}>
+                                <option value="0">Selecione um Plano</option>
                                 {plans.map(plan => (
                                     <option key={plan.id} value={plan.id}>{plan.name}</option>
                                 ))}
