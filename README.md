@@ -36,7 +36,7 @@ $ yarn seed:run
 ```
 Server
 ```bash
-$ yarn dev:serve
+$ yarn dev:server
 ```
 
 ## Front
