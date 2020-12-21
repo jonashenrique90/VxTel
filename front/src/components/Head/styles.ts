@@ -24,6 +24,15 @@ export const Container = styled.div`
         width: 350px;
         justify-self: flex-end;
     }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        img {
+            width: 250px;
+            justify-self: center;
+        }
+    }
 `;
 
 export const Content = styled.div`
@@ -40,6 +49,16 @@ export const Content = styled.div`
     @media (max-width: 890px) {
         text-align: center;
         margin-top: 40px;
+        h1 {
+            font-size: 4rem;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+    }
+    @media (max-width: 890px) {
+        text-align: center;
+        margin-top: 10px;
     }
 `;
 
@@ -54,6 +73,19 @@ export const SubHeadContainer = styled.div`
     img {
         width: 400px;
         justify-self: flex-end;
+    }
+
+    @media (max-width: 750px) {
+        grid-template-columns: 1fr;
+        img {
+            width: 300px;
+            justify-self: center;
+        }
+    }
+    @media (max-width: 495px) {
+        img {
+            display: none;
+        }
     }
 `;
 

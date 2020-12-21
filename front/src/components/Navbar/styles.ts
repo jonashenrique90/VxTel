@@ -41,8 +41,9 @@ export const Logo = styled.div`
     @media (max-width: 500px) {
         height: auto;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        justify-content: center;
     }
 
 `;
